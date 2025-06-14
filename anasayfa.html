@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <title>81 OTO GALERİ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet"> -->
+  <link rel="stylesheet" href="style.css" >
+</head>
+<body>
+
+ <!-- Font Awesome için -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"> -->
+<header class="navbar">
+  <div class="logo-container">
+    <img src="img/81logom.png" alt="Logo" class="logo">
+  </div>
+  <div class="menu-toggle" id="menu-toggle">
+    <i class="fas fa-bars"></i>
+  </div>
+  <nav class="nav-links" id="nav-links">
+    <a href="anasayfa.html"><span>Anasayfa</span></a>
+    <a href="araclar.html"><span>Araçlar</span></a>
+    <a href="hakkimizda.html"><span>Hakkımızda</span></a>
+    <a href="iletisim.html"><span>İletişim</span></a>
+  </nav>
+</header>
+
+  <section class="hero" id="hero">
+    <div class="hero-text">
+      <h2>Tozu Dumana Kat!</h2>
+      <p>“Sürüş tutkusunun vücut bulduğu noktadasınız. Seçkin araç koleksiyonumuzla tanışın.”</p>
+      <button class="cta-btn" onclick="startShow()">Göster Gücünü!</button>
+    </div>
+    <img src="img/araba1.jpg" class="car" id="car">
+  </section>
+
+  <footer>
+    &copy; 2025 81 OTO GALERİ. Her drift bir destandır.
+  </footer>
+
+  <script>
+    const car = document.getElementById('car');
+    const hero = document.getElementById('hero');
+    const images = [
+      'img/araba1.png',
+      'img/araba2.png',
+      'img/araba3.png',
+      'img/araba4.png'
+    ];
+    let index = 0;
+    let isAnimating = false;
+
+    function startShow() {
+      if (isAnimating) return;
+      isAnimating = true;
+
+      hero.classList.add('screen-shake');
+      car.src = images[index];
+      car.classList.remove('animate'); // animasyonu sıfırla
+      void car.offsetWidth; // reflow ile class yeniden işlesin
+      car.classList.add('animate'); // tekrar başlat
+
+      setTimeout(() => {
+        hero.classList.remove('screen-shake');
+      }, 500);
+
+      setTimeout(() => {
+        index = (index + 1) % images.length;
+        isAnimating = false;
+      }, 3700);
+    }
+
+    // otomatik başlat
+    startShow();
+    setInterval(() => {
+      startShow();
+    }, 4000);
+
+    
+  </script>
+<script>
+  const toggle = document.getElementById("menu-toggle");
+  const nav = document.getElementById("nav-links");
+
+  toggle.addEventListener("click", () => {
+    nav.classList.toggle("active");
+  });
+</script>
+
+</body>
+</html>

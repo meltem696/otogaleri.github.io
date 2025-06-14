@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>81 OTO GALERİ</title>
+<!--   
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet"> -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: #000;
+      color: #fff;
+    }
+
+    .navbar {
+      height: 90px;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(17, 17, 17, 0.6);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+      border-bottom: 1px solid rgba(255, 0, 0, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo-container img {
+      width: 200px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 600;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: red;
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .nav-links a:hover {
+      color: red;
+      text-shadow: 0 0 5px red;
+    }
+
+    .nav-links a:hover::after {
+      width: 80%;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      color: red;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 90px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background-color: rgba(17, 17, 17, 0.95);
+        display: none;
+        gap: 1rem;
+        padding: 1rem;
+        text-align: center;
+        border-top: 1px solid red;
+        z-index: 999;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      padding: 2rem;
+    }
+
+    @media (max-width: 1000px) {
+      .gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .car-card {
+      background-color: #1a1a1a;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.08);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .car-card:hover {
+      transform: scale(1.02);
+    }
+
+    .car-image-container {
+      position: relative;
+      height: 200px;
+      background: #000;
+    }
+
+    .car-image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    .car-image-container img.active {
+      display: block;
+    }
+
+    .slider-buttons {
+      display: flex;
+      justify-content: center;
+      background: #121212;
+      padding: 8px;
+      gap: 10px;
+    }
+
+    .slider-buttons button {
+      background: #111;
+      border: none;
+      color: #ccc;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: background 0.3s;
+    }
+
+    .slider-buttons button:hover {
+      background: red;
+      color: #fff;
+    }
+
+    .car-info {
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .car-info h3 {
+      color: red;
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .car-info p {
+      font-size: 0.9rem;
+      color: #bbb;
+    }
+
+    .contact-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin: 12px 0;
+    }
+
+    .contact-buttons a {
+      color: #cc0000;
+      font-size: 22px;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .contact-buttons a:hover {
+      transform: scale(1.3);
+      color: #ff0000;
+    }
+  </style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="logo-container">
+    <img src="img/81logom.png" alt="Logo" class="logo">
+  </div>
+  <div class="menu-toggle" id="menu-toggle">
+    <i class="fas fa-bars"></i>
+  </div>
+  <nav class="nav-links" id="nav-links">
+    <a href="anasayfa.html">Anasayfa</a>
+    <a href="araclar.html">Araçlar</a>
+    <a href="hakkimizda.html">Hakkımızda</a>
+    <a href="iletisim.html">İletişim</a>
+  </nav>
+</header>
+
+<main id="gallery" class="gallery"></main>
+
+<script>
+  const cars = [
+    { name: "BMW M5", description: "Sürüş keyfinin zirvesi.", images: [ "img/bmw002.jpg","img/bmwm.jpg"] },
+    { name: "Audi RS6", description: "Güç ve prestijin birleşimi.", images: ["img/audi1.jpg", "img/audi2.jpg"] },
+    { name: "Mercedes C63", description: "AMG ile gelen asalet.", images: ["img/merc1.jpg", "img/merc2.jpg"] },
+    { name: "Porsche 911", description: "Efsanevi performans.", images: ["img/porsche1.jpg", "img/porsche2.jpg"] },
+    { name: "Tesla Model S", description: "Gelecek elektrikli geliyor.", images: ["img/tesla1.jpg", "img/tesla2.jpg"] },
+    { name: "Nissan GT-R", description: "Japon teknolojisi zirvede.", images: ["img/gtr1.jpg", "img/gtr2.jpg"] },
+    { name: "Lamborghini Huracan", description: "Saf adrenalin, V10 çığlığı.", images: ["img/lamborghini1.jpg", "img/lamborghini2.jpg"] },
+    { name: "Ferrari F8", description: "İtalyan ruhunun simgesi.", images: ["img/ferrari1.jpg", "img/ferrari2.jpg"] },
+    { name: "Toyota Supra", description: "JDM efsanesi geri döndü.", images: ["img/toyota.jpg", "img/toyota2.jpg"] },
+    { name: "Ford Mustang", description: "Klasikten geleceğe V8 gücü.", images: ["img/mustang1.jpg", "img/mustang2.jpg"] },
+    { name: "Bugatti Chiron", description: "Dünyanın en hızlısı.", images: ["img/bugatti1.jpg", "img/bugatti2.jpg"] },
+    { name: "BMW M4", description: "Sürüş keyfinin zirvesi.", images: [ "img/bmwm2.jpg","img/bmwm1.jpg"] }
+  ];
+
+  const gallery = document.getElementById("gallery");
+
+  cars.forEach((car) => {
+    let current = 0;
+
+    const card = document.createElement("div");
+    card.className = "car-card";
+
+    const imageContainer = document.createElement("div");
+    imageContainer.className = "car-image-container";
+
+    const imageElements = car.images.map((src, index) => {
+      const img = document.createElement("img");
+      img.src = src;
+      if (index === 0) img.classList.add("active");
+      imageContainer.appendChild(img);
+      return img;
+    });
+
+    const info = document.createElement("div");
+    info.className = "car-info";
+    info.innerHTML = `<h3>${car.name}</h3><p>${car.description}</p>`;
+
+    const slider = document.createElement("div");
+    slider.className = "slider-buttons";
+
+    const prevBtn = document.createElement("button");
+    prevBtn.innerText = "◀";
+    prevBtn.onclick = () => {
+      imageElements[current].classList.remove("active");
+      current = (current - 1 + car.images.length) % car.images.length;
+      imageElements[current].classList.add("active");
+    };
+
+    const nextBtn = document.createElement("button");
+    nextBtn.innerText = "▶";
+    nextBtn.onclick = () => {
+      imageElements[current].classList.remove("active");
+      current = (current + 1) % car.images.length;
+      imageElements[current].classList.add("active");
+    };
+
+    slider.appendChild(prevBtn);
+    slider.appendChild(nextBtn);
+
+    const contact = document.createElement("div");
+    contact.className = "contact-buttons";
+    contact.innerHTML = `
+      <a href="tel:05306560735" title="Telefon"><i class="fas fa-phone"></i></a>
+      <a href="https://wa.me/905306560735?text=Merhaba,%20araçla%20ilgili%20detaylı%20bilgi%20alabilir%20miyim?" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    `;
+
+    card.appendChild(imageContainer);
+    card.appendChild(slider);
+    card.appendChild(info);
+    card.appendChild(contact);
+    gallery.appendChild(card);
+  });
+
+  // Menü toggle scripti
+  document.getElementById("menu-toggle").addEventListener("click", () => {
+    document.getElementById("nav-links").classList.toggle("active");
+  });
+</script>
+
+</body>
+</html>
